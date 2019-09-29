@@ -1,0 +1,12 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+/Restaurant365/.vs/Restaurant365
+/Restaurant365/Restaurant.App/bin
+/Restaurant365/Restaurant.App/obj
+/Restaurant365/Restaurant.Business/bin
+/Restaurant365/Restaurant.Business/obj
+/Restaurant365/Restaurant.Test/bin
+/Restaurant365/Restaurant.Test/obj
