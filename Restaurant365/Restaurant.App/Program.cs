@@ -1,7 +1,8 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using Restaurant.Business.Calculator;
+using Restaurant.App.Startup;
 using System;
+using Restaurant.App.Helpers;
 
 namespace Restaurant.App
 {
@@ -11,16 +12,23 @@ namespace Restaurant.App
         {
             Console.WriteLine("Starting Calculator...");
 
-            //setup our DI
-            var serviceProvider = new ServiceCollection()
-                .AddLogging()
-                .AddSingleton<IStringCalcManager, StringCalcManager>()
-                .BuildServiceProvider();
+            //setup the DI
+            IServiceCollection serviceCollection = new ServiceCollection()
+                .AddManagers(args);
+            var serviceProvider = serviceCollection.BuildServiceProvider();
+            var parser = serviceProvider.GetService<IParseManager>();
+            var calculator = serviceProvider.GetService<ICalculatorManager>();
 
-            //do the actual work here
-            var stringCalc = serviceProvider.GetService<IStringCalcManager>();
-
-            Console.WriteLine("Application has exited normally.");
+            while (true)
+            {
+                Console.WriteLine("Input your formula:");
+                var requestString = Console.ReadLine();
+                var request = parser.ParseRequest(requestString);
+                var response = calculator.ProcessCalculations(request);
+                Console.WriteLine("-------------------");
+                Console.WriteLine($"{request.FormatClean()} = {response}");
+            }
         }
+
     }
 }

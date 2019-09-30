@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Restaurant.App": {
+      "commandName": "Project",
+      "commandLineArgs": "/AllowNegativeNumbers /MaximumNumber:1000 /AlternateDelimiter:* /Operation:*"
+    }
+  }
+}
